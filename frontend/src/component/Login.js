@@ -12,7 +12,9 @@ function Login() {
     e.preventDefault();
     if (auth.username==="" || auth.password === "") {
       alert("Please fill all fields and select an image!");
-    } else {
+    }else if (auth.username === "admin" && auth.password === "admin123") {
+    window.location.href = "/dashboard";
+  }else {
     }
   }
   return (
