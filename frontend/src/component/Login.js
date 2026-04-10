@@ -20,19 +20,19 @@ function Login() {
     e.preventDefault();
 
     if (auth.username === "" || auth.password === "") {
-      alert("Please fill all fields and select an image!");
-    } else if (auth.username === "admin" && auth.password === "admin123") {
-      window.location.href = "/dashboard";
-    } else if(!auth.username){
-      alert("Enter correct Username.")
-      
-    }else if(!auth.password){
-      alert("Enter correct Password.")
-    
-    }else{
-      alert("Enter correct Username and Password.")
-
-    }
+      alert("Please fill all fields!");
+    } else if (!auth.username.trim()) {
+    alert("Enter correct Username.");
+  } 
+  else if (!auth.password.trim()) {
+    alert("Enter correct Password.");
+  } 
+  else if (auth.username === "admin" && auth.password === "admin123") {
+    window.location.href = "/dashboard";
+  } 
+  else {
+    alert("Enter correct Username and Password.");
+  }
   }
 
   return (
@@ -49,7 +49,6 @@ function Login() {
             placeholder="Username"
             value={auth.username}
             onChange={handleChange}
-            required
           />
 
           <input
@@ -58,7 +57,6 @@ function Login() {
             placeholder="Password"
             value={auth.password}
             onChange={handleChange}
-            required
           />
 
           <button type="submit">Login</button>
