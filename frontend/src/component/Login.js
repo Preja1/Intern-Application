@@ -8,6 +8,7 @@ function Login() {
     password: "",
   });
 
+
   function handleChange(e) {
     e.stopPropagation();
     setAuth({
@@ -19,20 +20,13 @@ function Login() {
   function handleLogin(e) {
     e.preventDefault();
 
-    if (auth.username === "" || auth.password === "") {
+    if (auth.username === "admin" && auth.password === "admin123") {
+      window.location.href = "/dashboard";
+    } else if (auth.username === "" || auth.password === "") {
       alert("Please fill all fields!");
-    } else if (!auth.username.trim()) {
-    alert("Enter correct Username.");
-  } 
-  else if (!auth.password.trim()) {
-    alert("Enter correct Password.");
-  } 
-  else if (auth.username === "admin" && auth.password === "admin123") {
-    window.location.href = "/dashboard";
-  } 
-  else {
-    alert("Enter correct Username and Password.");
-  }
+    }  else {
+      alert("Enter correct Username and Password.");
+    }
   }
 
   return (
