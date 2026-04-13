@@ -3,8 +3,11 @@ const { dbConnection } = require("./config/dbConnect");
 const app = express();
 console.log("HELLO WORLD");
 
+app.use(express.json());
 
-
+app.get("/api/dashboard", (req, res) => {
+  res.json({ message: "Dashboard data from backend" });
+});
 app.listen(3030, async () => {
   try {
     dbConnection();

@@ -1,16 +1,14 @@
 import Sidebar from "./Sidebar";
 
-function Dashboard(){
-    return (
+function Interns(){
+    return(
         <>
         <div className="layout" style={{display:"flex"}}>
         <Sidebar></Sidebar>
-        <div className="dash">
-            <h1>Dashboard</h1>
-        </div>
+        table
         </div>
         </>
     );
 }
 
-export default Dashboard;
+export default Interns;
