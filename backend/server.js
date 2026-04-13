@@ -1,14 +1,16 @@
 const express = require("express");
-const { dbConnection } = require("./config/dbConnect");
+const { dbConnection ,sequelize} = require("./config/dbConnect");
 const app = express();
 const cors =require('cors');
+const {userRouter} = require("./router/UserRouter");
 console.log("HELLO WORLD");
-
 app.use(express.json());
 app.use(cors({
   origin: "http://localhost:3000"
 }));
 
+app.use('/api',userRouter);
+sequelize.sync();
 app.get("/api/dashboard", (req, res) => {
   res.json({ message: "Dashboard data from backend" });
 });

@@ -16,4 +16,4 @@ const dbConnection = async() => {
 // console.log("Connect Db Complete.")
 };
 
-module.exports={dbConnection};
+module.exports={dbConnection,sequelize};
