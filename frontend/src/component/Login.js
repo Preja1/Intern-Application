@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import loginLogo from "../media/loginlogo.png";
 import "./Login.css";
 
 function Login() {
+  const navigate=useNavigate();
   const [auth, setAuth] = useState({
     username: "",
     password: "",
@@ -29,7 +31,7 @@ function Login() {
       const res = await axios.post("http://localhost:3030/api/login", auth);
 
       if (res.data.success) {
-        window.location.href = "/dashboard";
+        navigate("/dashboard",{state:{message:"Login successful."}});
       }
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
