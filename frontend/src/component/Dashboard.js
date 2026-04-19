@@ -1,24 +1,111 @@
 import Sidebar from "./Sidebar";
-import { useLocation } from "react-router-dom";
-import {useEffect} from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import "./Dashboard.css";
 
-function Dashboard(){
-    const location=useLocation();
-    useEffect(() => {
+function Dashboard() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+ 
+    const token = localStorage.getItem("token");
+
+
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:3030/api/dashboard", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        
+
+        console.log(res.data);
+      } catch (err) {
+        console.log(err.response?.data || err.message);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
+
+ 
+  useEffect(() => {
     if (location.state?.message) {
       console.log(location.state.message);
     }
-  }, [location.state?.message]);
-    return (
-        <>
-        <div className="layout" style={{display:"flex"}}>
+  }, [location.state]);
+
+  
+  return (
+    <>
+      <div className="layout" style={{ display: "flex" }}>
         <Sidebar></Sidebar>
         <div className="dash">
-            <h1>Dashboard</h1>
+          <h1 style={{ marginLeft: "10px" }}>Dashboard</h1>
+          <div className="cards">
+            <div className="card">
+              <h3>Total Interns</h3>
+              <p>120</p>
+            </div>
+
+            <div className="card">
+              <h3>Pending Applications</h3>
+              <p>35</p>
+            </div>
+
+            <div className="card">
+              <h3>Approved</h3>
+              <p>80</p>
+            </div>
+
+            <div className="card">
+              <h3>Rejected</h3>
+              <p>5</p>
+            </div>
+          </div>
+          <div className="table-section">
+            <div className="table-header">
+              <h2>Recent Applications</h2>
+              <Link to="/application">
+                <button className="add-btn">Add Application +</button>
+              </Link>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Application Name</th>
+                  <th>Email</th>
+                  <th>Internship</th>
+                  <th>Applied Date</th>
+                  <th>Ended Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Ram Shah</td>
+                  <td>ram@gmail.com</td>
+                  <td>Frontend</td>
+                  <td>2026-04-16</td>
+                  <td>2026-07-16</td>
+                  <td>
+                    <button>Edit</button>
+                    <button style={{ color: "red" }}>Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default Dashboard;

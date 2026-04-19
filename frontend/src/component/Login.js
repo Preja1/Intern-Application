@@ -31,6 +31,8 @@ function Login() {
       const res = await axios.post("http://localhost:3030/api/login", auth);
 
       if (res.data.success) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/dashboard",{state:{message:"Login successful."}});
       }
     } catch (err) {

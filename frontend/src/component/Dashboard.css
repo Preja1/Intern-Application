@@ -1,0 +1,64 @@
+.cards {
+  display: flex;
+}
+
+.card {
+  background: rgb(225, 224, 224);
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px 0px 10px 20px;
+}
+
+.table-section {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  margin-top: 20px;
+  height:fit-content;
+  background-color: #007a53;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.table-section button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
