@@ -7,12 +7,11 @@ import Interns from "./component/Interns";
 import Application from "./component/Application";
 
 function App() {
-  
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login></Login>} />
+          <Route path="/" element={<Login />} />
           <Route
             path="/dashboard"
             element={
@@ -21,8 +20,22 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/intern" element={<Interns></Interns>} />
-          <Route path="/application" element={<Application></Application>} />
+          <Route
+            path="/intern"
+            element={
+              <PrivateRoute>
+                <Interns />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/application"
+            element={
+              <PrivateRoute>
+                <Application />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

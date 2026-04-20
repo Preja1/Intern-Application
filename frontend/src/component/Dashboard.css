@@ -9,7 +9,7 @@
   width: 200px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin: 20px 0px 10px 20px;
+  margin: 20px 0px 10px 30px;
 }
 
 .table-section {
@@ -22,11 +22,12 @@
 .table-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 15px;
+  
 }
 
 .add-btn {
-  margin-top: 20px;
   height:fit-content;
   background-color: #007a53;
   color: white;
