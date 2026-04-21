@@ -5,6 +5,7 @@ import Login from "./component/Login";
 import Dashboard from "./component/Dashboard";
 import Interns from "./component/Interns";
 import Application from "./component/Application";
+import Detail from "./component/Detail";
 
 function App() {
   return (
@@ -33,6 +34,15 @@ function App() {
             element={
               <PrivateRoute>
                 <Application />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/application"
+            element={
+              <PrivateRoute>
+                <Detail />
               </PrivateRoute>
             }
           />

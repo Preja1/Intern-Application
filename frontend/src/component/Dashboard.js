@@ -2,44 +2,49 @@ import Sidebar from "./Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Dashboard.css";
 
 function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
- 
     const token = localStorage.getItem("token");
-
+    
 
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3030/api/dashboard", {
-          headers: {
-            Authorization: token,
+        const dashboardRes = await axios.get(
+          "http://localhost:3030/api/dashboard",
+          {
+            headers: {
+              Authorization: token,
+            },
           },
-        });
-        
+        );
 
-        console.log(res.data);
+        console.log("Dashboard:", dashboardRes.data);
+        const appRes = await axios.get(
+          "http://localhost:3030/api/applications",
+        );
+
+        setApplications(appRes.data.data);
       } catch (err) {
         console.log(err.response?.data || err.message);
       }
     };
 
     fetchData();
-  }, [navigate]);
+  }, []);
 
- 
   useEffect(() => {
     if (location.state?.message) {
       console.log(location.state.message);
     }
   }, [location.state]);
 
-  
   return (
     <>
       <div className="layout" style={{ display: "flex" }}>
@@ -49,7 +54,7 @@ function Dashboard() {
           <div className="cards">
             <div className="card">
               <h3>Total Interns</h3>
-              <p>120</p>
+              <p>{applications.length}</p>
             </div>
 
             <div className="card">
@@ -88,17 +93,23 @@ function Dashboard() {
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Ram Shah</td>
-                  <td>ram@gmail.com</td>
-                  <td>Frontend</td>
-                  <td>2026-04-16</td>
-                  <td>2026-07-16</td>
-                  <td>
-                    <button>Edit</button>
-                    <button style={{ color: "red" }}>Delete</button>
-                  </td>
-                </tr>
+                {applications.map((app) => (
+                  <tr key={app.id}>
+                    <td>
+                      {app.firstName} {app.lastName}
+                    </td>
+                    <td>{app.email}</td>
+                    <td>{app.course}</td>
+                    <td>{app.startDate}</td>
+                    <td>{app.endDate}</td>
+                    <td>
+                      <button onClick={() => navigate(`/edit/${app.id}`)}>
+                        Edit
+                      </button>
+                      <button style={{ color: "red" }}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

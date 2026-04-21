@@ -1,8 +1,11 @@
 import Sidebar from "./Sidebar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Application.css";
 
 function Application() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -11,28 +14,41 @@ function Application() {
     dob: "",
     course: "",
     education: "",
-    citizenship: "",
     startDate: "",
     endDate: "",
     resume: null,
+    citizenship: null,
+    collegeApplication: null,
   });
 
   function handleChange(e) {
     const { name, value, files } = e.target;
 
-    if (name === "resume") {
-      setForm({ ...form, resume: files[0] });
+    if (files) {
+      setForm({ ...form, [name]: files[0] });
     } else {
       setForm({ ...form, [name]: value });
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Form Data:", form);
+    const formData = new FormData();
 
-    alert("Application Submitted Successfully!");
+    for (let key in form) {
+      formData.append(key, form[key]);
+    }
+
+    try {
+      const res =await axios.post("http://localhost:3030/api/application", formData);
+      if (res.data.success) {
+        alert("Application Submitted Successfully!");
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <>
@@ -82,51 +98,52 @@ function Application() {
                 onChange={handleChange}
                 required
               />
-              <br />
-              <br />
             </div>
-            {/* Academic Details */}
-            <h3>Academic Details</h3>
 
-            <input
-              type="text"
-              name="university"
-              placeholder="Education"
-              onChange={handleChange}
-            />
+            <div className="academic-section">
+              <h3>Academic Details</h3>
 
-            <input
-              type="text"
-              name="course"
-              placeholder="Course"
-              onChange={handleChange}
-            />
-            <br />
-            <br />
-            {/* Intern Details */}
-            <h3>Intern Details</h3>
+              <input
+                type="text"
+                name="education"
+                placeholder="Education"
+                onChange={handleChange}
+              />
 
-            <label>Start Date:</label>
-            <br />
-            <input type="date" name="startDate" onChange={handleChange} />
-            <br />
-            <br />
+              <input
+                type="text"
+                name="course"
+                placeholder="Course"
+                onChange={handleChange}
+              />
+            </div>
 
-            <label>End Date:</label>
-            <br />
-            <input type="date" name="endDate" onChange={handleChange} />
-            <br />
-            <br />
+            <div className="date-section">
+              <h3>Intern Details</h3>
+              <label>Start Date:</label>
+              <input type="date" name="startDate" onChange={handleChange} />
+              <label>End Date:</label>
+              <input type="date" name="endDate" onChange={handleChange} />
+            </div>
 
-            <h3>Upload Resume</h3>
-            <input type="file" name="resume" onChange={handleChange} />
-
-            <h3>Upload Citizenship</h3>
-            <input type="file" name="resume" onChange={handleChange} />
-
-            <h3>Upload College Application</h3>
-
-            <input type="file" name="resume" onChange={handleChange} />
+            <div className="document-sections">
+              <div className="section">
+                <h3>Upload Resume</h3>
+                <input type="file" name="resume" onChange={handleChange} />
+              </div>
+              <div className="section">
+                <h3>Upload Citizenship</h3>
+                <input type="file" name="citizenship" onChange={handleChange} />
+              </div>
+              <div className="section">
+                <h3>Upload College Application</h3>
+                <input
+                  type="file"
+                  name="collegeApplication"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
             <button type="submit">Submit Application</button>
           </form>
