@@ -93,3 +93,29 @@ exports.updateApplication = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.deleteApplication = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const app = await Application.findByPk(id);
+
+    if (!app) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    await app.destroy();
+
+    res.json({
+      success: true,
+      message: "Application deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};

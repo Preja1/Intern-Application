@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -12,7 +14,6 @@ function Dashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    
 
     const fetchData = async () => {
       try {
@@ -44,7 +45,35 @@ function Dashboard() {
       console.log(location.state.message);
     }
   }, [location.state]);
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to delete this intern?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
 
+    if (result.isConfirmed) {
+      try {
+        const res = await axios.delete(
+          `http://localhost:3030/api/application/${id}`,
+        );
+
+        if (res.data.success) {
+          toast.success("Deleted Successfully!");
+
+          setApplications((prev) => prev.filter((app) => app.id !== id));
+        }
+      } catch (err) {
+        console.log(err.response?.data || err.message);
+        toast.error("Delete failed");
+      }
+    }
+  };
   return (
     <>
       <div className="layout" style={{ display: "flex" }}>
@@ -106,7 +135,12 @@ function Dashboard() {
                       <button onClick={() => navigate(`/edit/${app.id}`)}>
                         Edit
                       </button>
-                      <button style={{ color: "red" }}>Delete</button>
+                      <button
+                        onClick={() => handleDelete(app.id)}
+                        style={{ color: "red" }}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

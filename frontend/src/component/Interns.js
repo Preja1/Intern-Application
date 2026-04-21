@@ -29,7 +29,7 @@ useEffect(() => {
             <h2>All Interns</h2>
           </div>
 
-          <table className="table" style={{ width: "150%" }}>
+          <table className="table" style={{ width: "130%" }}>
             <thead>
               <tr>
                 <th>Application Name</th>

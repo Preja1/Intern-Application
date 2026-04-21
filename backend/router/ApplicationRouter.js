@@ -2,18 +2,23 @@ const express = require("express");
 const applicationRouter = express.Router();
 
 const upload = require("../middleware/upload");
-const { createApplication,getApplications,getApplicationById,updateApplication } = require("../controller/ApplicationController");
+const {
+  createApplication,
+  getApplications,
+  getApplicationById,
+  updateApplication,
+  deleteApplication,
+} = require("../controller/ApplicationController");
 
-applicationRouter
-.post(
+applicationRouter.post(
   "/application",
   upload.fields([
     { name: "resume", maxCount: 1 },
     { name: "citizenship", maxCount: 1 },
     { name: "collegeApplication", maxCount: 1 },
   ]),
-  createApplication
-)
+  createApplication,
+);
 applicationRouter.get("/applications", getApplications);
 applicationRouter.get("/application/:id", getApplicationById);
 applicationRouter.put(
@@ -23,8 +28,8 @@ applicationRouter.put(
     { name: "citizenship", maxCount: 1 },
     { name: "collegeApplication", maxCount: 1 },
   ]),
-  updateApplication
+  updateApplication,
 );
+applicationRouter.delete("/application/:id", deleteApplication);
 
-
-module.exports = { applicationRouter};
+module.exports = { applicationRouter };
