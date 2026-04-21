@@ -6,12 +6,16 @@ import Dashboard from "./component/Dashboard";
 import Interns from "./component/Interns";
 import Application from "./component/Application";
 import Detail from "./component/Detail";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={2000} />
         <Routes>
+          
           <Route path="/" element={<Login />} />
           <Route
             path="/dashboard"
@@ -46,6 +50,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/edit/:id" element={<Application />} />
         </Routes>
       </BrowserRouter>
     </>
