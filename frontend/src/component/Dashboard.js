@@ -39,6 +39,17 @@ function Dashboard() {
 
     fetchData();
   }, []);
+  const pendingCount = applications.filter(
+    (app) => app.status === "Pending",
+  ).length;
+
+  const approvedCount = applications.filter(
+    (app) => app.status === "Approved",
+  ).length;
+
+  const rejectedCount = applications.filter(
+    (app) => app.status === "Rejected",
+  ).length;
 
   useEffect(() => {
     if (location.state?.message) {
@@ -88,17 +99,17 @@ function Dashboard() {
 
             <div className="card">
               <h3>Pending Applications</h3>
-              <p>35</p>
+              <p>{pendingCount}</p>
             </div>
 
             <div className="card">
               <h3>Approved</h3>
-              <p>80</p>
+              <p>{approvedCount}</p>
             </div>
 
             <div className="card">
               <h3>Rejected</h3>
-              <p>5</p>
+              <p>{rejectedCount}</p>
             </div>
           </div>
           <div className="table-section">
@@ -117,6 +128,7 @@ function Dashboard() {
                   <th>Internship</th>
                   <th>Applied Date</th>
                   <th>Ended Date</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -131,6 +143,21 @@ function Dashboard() {
                     <td>{app.course}</td>
                     <td>{app.startDate}</td>
                     <td>{app.endDate}</td>
+                    <td>
+                      <span
+                        style={{
+                          color:
+                            app.status === "Approved"
+                              ? "green"
+                              : app.status === "Rejected"
+                                ? "red"
+                                : "orange",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {app.status}
+                      </span>
+                    </td>
                     <td>
                       <button onClick={() => navigate(`/edit/${app.id}`)}>
                         Edit

@@ -119,3 +119,22 @@ exports.deleteApplication = async (req, res) => {
     });
   }
 };
+
+exports.updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    await Application.update(
+      { status },
+      { where: { id } }
+    );
+
+    res.json({
+      success: true,
+      message: "Status updated",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

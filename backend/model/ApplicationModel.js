@@ -15,7 +15,13 @@ const Application = sequelize.define("Application", {
   resume: DataTypes.STRING,
   citizenship: DataTypes.STRING,
   collegeApplication: DataTypes.STRING,
-},{
+
+  status: {
+  type: DataTypes.STRING,
+  defaultValue: "Pending",
+},
+},
+{
     tableName:"Application",
     timestamps:false,
 });

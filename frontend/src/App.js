@@ -8,6 +8,7 @@ import Application from "./component/Application";
 import Detail from "./component/Detail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrevousRequest from "./component/PreviousRequest";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/previousreq"
+            element={
+              <PrivateRoute>
+                <PrevousRequest />
               </PrivateRoute>
             }
           />

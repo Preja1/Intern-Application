@@ -13,6 +13,7 @@ function Sidebar(){
          <img src={loginLogo} alt="Digital" className="dashLogo" />
          <div className="dashItem">
             <Link to="/dashboard"><button>Dashboard</button></Link>
+            <Link to="/previousreq"><button>Previous Request</button></Link>
             <Link to="/intern"><button>Interns</button></Link>
             <Link to="/application"><button>Application</button></Link>
             <button onClick={handleLogout}>Logout</button>
