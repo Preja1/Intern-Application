@@ -10,7 +10,9 @@ function Sidebar(){
     return (
         <>
         <div className="sidebox">
-         <img src={loginLogo} alt="Digital" className="dashLogo" />
+            <div className='image'>
+         <img src={loginLogo} alt="Digital" className="dashLogo" /></div>
+         
          <div className="dashItem">
             <Link to="/dashboard"><button>Dashboard</button></Link>
             <Link to="/previousreq"><button>Previous Request</button></Link>

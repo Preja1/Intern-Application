@@ -6,13 +6,9 @@ import Swal from "sweetalert2";
 
 function Interns() {
   const [applications, setApplications] = useState([]);
-
-  // store selected application globally
   const [selectedApp, setSelectedApp] = useState(null);
 
-  // =========================
-  // FETCH DATA
-  // =========================
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,20 +25,14 @@ function Interns() {
     fetchData();
   }, []);
 
-  // =========================
-  // FILE URL HELPER
-  // =========================
   const getFileUrl = (file) =>
     `http://localhost:3030/uploads/${file}`;
 
-  // =========================
-  // PDF POPUP
-  // =========================
   const openPdf = (type) => {
     const fileMap = {
       resume: selectedApp.resume,
       citizenship: selectedApp.citizenship,
-      application: selectedApp.application,
+      application: selectedApp.collegeApplication,
     };
 
     const url = getFileUrl(fileMap[type]);
@@ -71,9 +61,6 @@ function Interns() {
   // expose for SweetAlert HTML buttons
   window.openPdf = openPdf;
 
-  // =========================
-  // DETAIL POPUP
-  // =========================
   const showDetails = (app) => {
     setSelectedApp(app);
 
@@ -122,19 +109,16 @@ function Interns() {
     });
   };
 
-  // =========================
-  // UI
-  // =========================
   return (
     <div className="layout" style={{ display: "flex" }}>
       <Sidebar />
 
-      <div className="table-section">
-        <div className="table-header">
+      <div className="dash" >
+        <div className="table-header" style={{marginLeft:"20px"}}>
           <h2>All Interns</h2>
         </div>
 
-        <table className="table" style={{ width: "130%" }}>
+        <table className="table" style={{ width: "90%",marginLeft:"20px" }}>
           <thead>
             <tr>
               <th>Application Name</th>

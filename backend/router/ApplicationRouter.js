@@ -32,6 +32,6 @@ applicationRouter.put(
   updateApplication,
 );
 applicationRouter.delete("/application/:id", deleteApplication);
-applicationRouter.put("/application/status/:id", updateStatus);
+applicationRouter.put("/application/:id/status", updateStatus);
 
 module.exports = { applicationRouter };
