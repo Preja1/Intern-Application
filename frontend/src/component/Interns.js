@@ -8,12 +8,11 @@ function Interns() {
   const [applications, setApplications] = useState([]);
   const [selectedApp, setSelectedApp] = useState(null);
 
- 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const appRes = await axios.get(
-          "http://localhost:3030/api/applications"
+          "http://localhost:3030/api/applications",
         );
 
         setApplications(appRes.data.data);
@@ -25,8 +24,7 @@ function Interns() {
     fetchData();
   }, []);
 
-  const getFileUrl = (file) =>
-    `http://localhost:3030/uploads/${file}`;
+  const getFileUrl = (file) => `http://localhost:3030/uploads/${file}`;
 
   const openPdf = (type) => {
     const fileMap = {
@@ -67,6 +65,9 @@ function Interns() {
     Swal.fire({
       title: "Intern Details",
       width: "800px",
+      customClass: {
+        title: "swal-title-bg",
+      },
       html: `
         <div style="text-align:left">
 
@@ -113,12 +114,12 @@ function Interns() {
     <div className="layout" style={{ display: "flex" }}>
       <Sidebar />
 
-      <div className="dash" >
-        <div className="table-header" style={{marginLeft:"20px"}}>
+      <div className="dash">
+        <div className="table-header" style={{ marginLeft: "20px" }}>
           <h2>All Interns</h2>
         </div>
 
-        <table className="table" style={{ width: "90%",marginLeft:"20px" }}>
+        <table className="table" style={{ width: "90%", marginLeft: "20px" }}>
           <thead>
             <tr>
               <th>Application Name</th>

@@ -2,10 +2,12 @@ import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "./PreviousRequest.css";
 
 function PreviousRequest() {
   const [applications, setApplications] = useState([]);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -29,7 +31,8 @@ function PreviousRequest() {
 
       if (res.data.success) {
         toast.success(`Application ${status}`);
-        fetchData(); // refresh UI
+        navigate("/dashboard");
+        fetchData();
       }
     } catch (err) {
       console.log(err);

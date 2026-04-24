@@ -67,3 +67,9 @@ th {
 button:hover {
   opacity: 0.8;
 }
+
+
+.swal-title-bg{
+  background-color: #007a53;
+  color: white;
+}
