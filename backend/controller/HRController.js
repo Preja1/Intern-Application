@@ -5,8 +5,18 @@ exports.approveDuration = async (req, res) => {
   try {
     const app = await Application.findByPk(req.params.id);
 
+    const start = new Date(app.startDate);
+
+    start.setMonth(
+      start.getMonth() + Number(app.durationRequest)
+    );
+
+    const newEndDate =
+      start.toISOString().split("T")[0];
+
     await app.update({
       duration: app.durationRequest,
+      endDate: newEndDate,
       durationRequest: null,
       durationStatus: "Approved",
     });

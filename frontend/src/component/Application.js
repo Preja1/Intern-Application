@@ -16,6 +16,7 @@ function Application() {
     dob: "",
     course: "",
     education: "",
+    duration: "",
     startDate: "",
     endDate: "",
     resume: null,
@@ -41,6 +42,7 @@ function Application() {
             dob: app.dob || "",
             course: app.course || "",
             education: app.education || "",
+            duration: app.duration || "",
             startDate: app.startDate || "",
             endDate: app.endDate || "",
             resume: null,
@@ -52,15 +54,41 @@ function Application() {
     }
   }, [id]);
 
-  function handleChange(e) {
-    const { name, value, files } = e.target;
+function handleChange(e) {
+  const { name, value, files } = e.target;
 
-    if (files) {
-      setForm((prev) => ({ ...prev, [name]: files[0] }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
+  if (files) {
+    setForm((prev) => ({
+      ...prev,
+      [name]: files[0],
+    }));
+  } else {
+    setForm((prev) => {
+      const updatedForm = {
+        ...prev,
+        [name]: value,
+      };
+
+      
+      if (
+        (name === "startDate" || name === "duration") &&
+        updatedForm.startDate &&
+        updatedForm.duration
+      ) {
+        const start = new Date(updatedForm.startDate);
+
+        start.setMonth(
+          start.getMonth() + Number(updatedForm.duration)
+        );
+
+        updatedForm.endDate =
+          start.toISOString().split("T")[0];
+      }
+
+      return updatedForm;
+    });
   }
+}
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -195,7 +223,8 @@ function Application() {
                 type="date"
                 name="endDate"
                 value={form.endDate}
-                onChange={handleChange}
+                // onChange={handleChange}
+                readOnly
               />
             </div>
             <br></br>
