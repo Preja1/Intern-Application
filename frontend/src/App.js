@@ -5,7 +5,6 @@ import Login from "./component/Login";
 import Dashboard from "./component/Dashboard";
 import Interns from "./component/Interns";
 import Application from "./component/Application";
-import Detail from "./component/Detail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrevousRequest from "./component/PreviousRequest";
@@ -53,14 +52,6 @@ function App() {
             }
           />
 
-          <Route
-            path="/application"
-            element={
-              <PrivateRoute>
-                <Detail />
-              </PrivateRoute>
-            }
-          />
           <Route
             path="/history"
             element={

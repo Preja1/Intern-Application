@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
 import "./History.css";
 
@@ -26,7 +27,20 @@ function History() {
 
   // request duration change
   const requestChange = async (id) => {
-    const newDuration = prompt("Enter new duration (2 or 3 months)");
+    const { value: newDuration } = await Swal.fire({
+    title: "Request Duration Change",
+    input: "select",
+    inputOptions: {
+      2: "2 Months",
+      3: "3 Months",
+    },
+    inputPlaceholder: "Select duration",
+    showCancelButton: true,
+    confirmButtonText: "Send Request",
+    cancelButtonText: "Cancel",
+    background: "#fff",
+    color: "#000",
+  });
 
     if (!newDuration) return;
 
