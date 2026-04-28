@@ -8,18 +8,29 @@
   margin-bottom: 20px;
 }
 
-/* MAIN BOX */
+
+.pre-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pre-header button{
+  height:fit-content;
+  background-color: #476d9b;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 .receipt-box {
-  /* background: white; */
   padding: 25px;
-  /* border-radius: 10px; */
   width: 600px;
   border-collapse: collapse;
   margin-top: 10px;
-  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
 }
 
-/* ROW STYLE */
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -41,14 +52,14 @@
   text-decoration: underline;
 }
 
-/* SECTION TITLE */
+
 .section-title {
   margin-top: 20px;
   margin-bottom: 10px;
   color: #007a53;
 }
 
-/* SIGNATURE */
+
 .signature-box {
   display: flex;
   justify-content: space-between;

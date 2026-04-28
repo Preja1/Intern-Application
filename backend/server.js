@@ -6,6 +6,8 @@ const {loginRouter} = require("./router/LoginRouter");
 const {authMiddleware}=require("./middleware/authMiddleware");
 const { clearToken } = require("./authToken");
 const { applicationRouter } = require("./router/ApplicationRouter");
+const {hrRouter}=require("./router/HRRouter");
+// const {Application}=require("./model/ApplicationModel");
 console.log("HELLO WORLD");
 app.use(express.json());
 app.use(cors({
@@ -13,13 +15,14 @@ app.use(cors({
 }));
 
 app.use('/api',loginRouter);
+// Application.sync({force:true});
 sequelize.sync();
 app.get("/api/dashboard", authMiddleware,(req, res) => {
   res.json({ message: "Dashboard data from backend" });
 });
 // routes
 app.use("/api", applicationRouter);
-
+app.use("/api", hrRouter);
 // serve files
 app.use("/uploads", express.static("uploads"));
 

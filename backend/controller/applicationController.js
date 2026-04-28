@@ -138,3 +138,20 @@ exports.updateStatus = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.requestDurationChange = async (req, res) => {
+  try {
+    const { duration } = req.body;
+
+    const app = await Application.findByPk(req.params.id);
+
+    await app.update({
+      durationRequest: duration,
+      durationStatus: "Pending",
+    });
+
+    res.json({ success: true, message: "Request sent to HR" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

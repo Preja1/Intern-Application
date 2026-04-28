@@ -8,7 +8,7 @@ const {
   getApplicationById,
   updateApplication,
   deleteApplication,
-  updateStatus,
+  updateStatus,requestDurationChange
 } = require("../controller/ApplicationController");
 
 applicationRouter.post(
@@ -33,5 +33,6 @@ applicationRouter.put(
 );
 applicationRouter.delete("/application/:id", deleteApplication);
 applicationRouter.put("/application/:id/status", updateStatus);
+applicationRouter.put("/application/:id/request-duration", requestDurationChange);
 
 module.exports = { applicationRouter };

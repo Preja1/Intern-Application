@@ -9,6 +9,8 @@ import Detail from "./component/Detail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrevousRequest from "./component/PreviousRequest";
+import History from "./component/History";
+import HRRequest from "./component/HRRequest";
 
 function App() {
   return (
@@ -56,6 +58,22 @@ function App() {
             element={
               <PrivateRoute>
                 <Detail />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <PrivateRoute>
+                <History/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/hrrequest"
+            element={
+              <PrivateRoute>
+                < HRRequest></HRRequest>
               </PrivateRoute>
             }
           />

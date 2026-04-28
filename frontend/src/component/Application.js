@@ -149,7 +149,8 @@ function Application() {
                 onChange={handleChange}
                 required
               />
-            </div><br></br>
+            </div>
+            <br></br>
 
             <div className="academic-section">
               <h3>Academic Details</h3>
@@ -169,10 +170,19 @@ function Application() {
                 value={form.course}
                 onChange={handleChange}
               />
-            </div><br></br>
+            </div>
+            <br></br>
 
             <div className="date-section">
               <h3>Intern Details</h3>
+              <input
+                type="number"
+                name="duration"
+                placeholder="Duration (months)"
+                value={form.duration}
+                min="1"
+                onChange={handleChange}
+              />
               <label>Start Date:</label>
               <input
                 type="date"
@@ -187,7 +197,8 @@ function Application() {
                 value={form.endDate}
                 onChange={handleChange}
               />
-            </div><br></br>
+            </div>
+            <br></br>
 
             <div className="document-sections">
               <div className="section">
@@ -206,7 +217,8 @@ function Application() {
                   onChange={handleChange}
                 />
               </div>
-            </div><br></br>
+            </div>
+            <br></br>
 
             <button type="submit">
               {id ? "Update Application" : "Submit Application"}

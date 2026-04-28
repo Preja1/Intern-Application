@@ -44,7 +44,19 @@ function PreviousRequest() {
       <Sidebar />
 
       <div className="receipt-container">
+      <div className="pre-header">
         <h2>Application Request Details</h2>
+
+
+
+  <button
+
+    onClick={() => navigate("/history")}
+  >
+    View History
+  </button>
+  </div>
+
 
         {applications.length === 0 ? (
           <p>Loading...</p>

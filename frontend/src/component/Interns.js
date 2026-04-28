@@ -106,7 +106,7 @@ function Interns() {
         </div>
       `,
       showCloseButton: true,
-      confirmButtonColor: "#007A53",
+      confirmButtonColor: "#476d9b",
     });
   };
 
@@ -144,7 +144,7 @@ function Interns() {
                 <td>
                   <button
                     onClick={() => showDetails(app)}
-                    style={{ backgroundColor: "#007A53", color: "white" }}
+                    style={{ backgroundColor: "#476d9b", color: "white", padding:"4px" }}
                   >
                     Detail
                   </button>
