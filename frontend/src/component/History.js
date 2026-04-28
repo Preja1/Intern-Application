@@ -37,6 +37,7 @@ function History() {
     inputPlaceholder: "Select duration",
     showCancelButton: true,
     confirmButtonText: "Send Request",
+    confirmButtonColor:"#476d9b",
     cancelButtonText: "Cancel",
     background: "#fff",
     color: "#000",
@@ -51,7 +52,13 @@ function History() {
       );
 
       if (res.data.success) {
-        alert("Request sent to HR");
+         Swal.fire({
+        icon: "success",
+        title: "Request Sent!",
+        text: "Duration request sent to HR successfully.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
         fetchData();
       }
     } catch (err) {
