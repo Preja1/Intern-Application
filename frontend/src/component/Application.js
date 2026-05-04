@@ -249,7 +249,7 @@ function handleChange(e) {
             </div>
             <br></br>
 
-            <button type="submit">
+            <button type="submit" style={{marginLeft:"40%"}}>
               {id ? "Update Application" : "Submit Application"}
             </button>
           </form>

@@ -9,7 +9,7 @@ function HRRequest() {
     const res = await axios.get("http://localhost:3030/api/applications");
 
     const pending = res.data.data.filter(
-      (app) => app.durationStatus === "Pending"
+      (app) => app.durationStatus === "Pending",
     );
 
     setApplications(pending);
@@ -38,12 +38,30 @@ function HRRequest() {
 
         {applications.map((app) => (
           <div key={app.id}>
-            <p>{app.firstName} {app.lastName}</p>
+            <p>
+              {app.firstName} {app.lastName}
+            </p>
             <p>Current: {app.duration} months</p>
             <p>Requested: {app.durationRequest} months</p>
 
-            <button onClick={() => approve(app.id)}>Approve</button>
-            <button onClick={() => reject(app.id)}>Reject</button>
+            <button
+              style={{
+                background: "green",
+                color: "white",
+              }}
+              onClick={() => approve(app.id)}
+            >
+              Approve
+            </button>
+            <button
+              style={{
+                background: "red",
+                color: "white",
+              }}
+              onClick={() => reject(app.id)}
+            >
+              Reject
+            </button>
 
             <hr />
           </div>
